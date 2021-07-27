@@ -13,5 +13,5 @@ client.on('message', msg => {
     commandDispatcher(msg)
 });
 
-client.login('NzAyNTk5Mzk2OTMxNjY2MDkz.XqCYrQ.YKcJ2Q7XjvjYA88cn9HI3rI19A0');
+client.login('');
 
