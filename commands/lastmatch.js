@@ -8,7 +8,11 @@ const visualize = require("../misc/visualize")
 const nodeHtmlToImage = require('node-html-to-image')
 
 function lastmatch (msg) {
-    const [,,region, summonerName] = msg.content.split(" ", 4)
+    let summonerName = msg.content.split(" ")
+    const [,, region] = summonerName
+    summonerName.splice(0, 3)
+    summonerName = summonerName.join(" ")
+    console.log(summonerName)
 
     if (!getRegion(region)) return msg.reply("Mistyped or non-existing region!")
 
@@ -16,10 +20,10 @@ function lastmatch (msg) {
         getMatch(region, matchId).then(
             ({data}) => {   
                 nodeHtmlToImage({
-                    output: './image.png',
+                    output: `./images/${matchId}.png`,
                     html: visualize(summonerName, data)
                   })
-                    .then(() => console.log('The image was created successfully!'))
+                    .then(() => msg.reply("Maç sonu", {files: [`images/${matchId}.png`]}))
             }
         )
     }
